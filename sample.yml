@@ -1,0 +1,7 @@
+windows:
+  - name: sample-two-panes
+    root: ~/Documents/wc/myvue/myvue
+    layout: even-horizontal
+    panes:
+      - git status
+      - npm run dev
