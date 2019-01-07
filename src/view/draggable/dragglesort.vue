@@ -8,6 +8,7 @@
         </div>
       </transition-group>
     </draggable>
+    <h1 v-if="istrue">{{typeof(istrue)}}</h1>
   </div>
 </template>
 <script>
@@ -26,6 +27,12 @@
         }, {
           id: 4
         }]
+      }
+    },
+    props:{
+      istrue:{
+        type: Boolean,
+        default: false,
       }
     },
     methods: {

@@ -1,7 +1,8 @@
 <template>
  	
 	<div class="hello">
-		<draggable v-model="projectdatas"  :options="{group:'people'}">
+		<draggable v-model="projectdatas"  :options="{group:'people'}"
+		>
 			<div class='select-item' draggable='true' @dragstart='drag($event)' v-for='pjdt in projectdatas'>{{pjdt.name}}</div>
 		</draggable>
 		<h1 style="text-align: center;" >拖动到指定div</h1>
@@ -20,7 +21,7 @@
 			</div>
 		</template>
 
-		<dragglesort ></dragglesort>
+		<dragglesort :istrue="true"></dragglesort>
 		<guanwang></guanwang>
 	</div>
 </template>

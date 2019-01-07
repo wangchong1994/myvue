@@ -35,6 +35,7 @@
     <Row>
       <linebox></linebox>
     </Row>
+    <div id="showdiv" ><span id="showspan" >事件流</span></div>
   </div>
 </template>
 
@@ -70,6 +71,18 @@ export default {
       ],
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created() {
+    document.getElementById("showdiv").addEventListener("click",function(){console.log("div")},false);
+    document.getElementById("showspan").addEventListener("click",function(){console.log("span")},false);
+  },
+  methods: {
+    // showdiv(){
+    //   console.log("div")
+    // },
+    // showspan() {
+    //   console.log("span")
+    // }
   },
   components: {
     datapicker,select,linebox
