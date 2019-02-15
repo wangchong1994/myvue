@@ -15,7 +15,7 @@ export default {
   methods:{
     getapibody(){
       console.log('获取apibody');
-      this.$http('http://localhost:3000/string/data1').then((data)=>{
+      this.$http('http://localhost:3000/json').then((data)=>{
         console.log(data)
       })
     }
