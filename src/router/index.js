@@ -4,8 +4,11 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import vuexcount from '@/view/vuexcount.vue'
 import draggable from '@/view/draggable'
+import timer from '@/view/timer'
+import form from '@/view/form'
 import swiper from '@/components/swiper'
 import koaapiget from '@/components/koaapiget'
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +37,16 @@ export default new Router({
       path: '/koaapiget',
       name: 'koaapiget',
       component: koaapiget
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: form
+    },
+    {
+      path: '/timer',
+      name: 'timer',
+      component: timer
     }
   ]
 })

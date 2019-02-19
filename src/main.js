@@ -10,6 +10,7 @@ import store from './store'
 import axios from 'axios'
 
 Vue.prototype.$echarts = echarts
+axios.defaults.withCredentials = true; //配置为true
 Vue.prototype.$http = axios
 Vue.use(iview)
 
