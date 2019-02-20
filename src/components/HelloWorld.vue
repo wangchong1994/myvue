@@ -73,6 +73,7 @@ export default {
     }
   },
   created() {
+    console.log("RESPONSE_MSG", this.$t(`RESPONSE_MSG.DATA_NOT_EXIST`));
     document.getElementById("showdiv").addEventListener("click",function(){console.log("div")},false);
     document.getElementById("showspan").addEventListener("click",function(){console.log("span")},false);
   },

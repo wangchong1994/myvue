@@ -8,6 +8,11 @@ import 'iview/dist/styles/iview.css'
 import echarts from 'echarts'
 import store from './store'
 import axios from 'axios'
+import YpI18n from 'pkg-error-msg-hello';
+import VueI18n from 'vue-i18n';
+
+
+Vue.use(VueI18n);
 
 Vue.prototype.$echarts = echarts
 axios.defaults.withCredentials = true; //配置为true
@@ -16,12 +21,37 @@ Vue.use(iview)
 
 Vue.config.productionTip = false
 
+const langMessages = {
+  en: {
+    
+  },
+  zh: {
+
+  }
+}
+
+YpI18n('en')
+    .then((msg) => {
+      console.log("msg", msg);
+      Object.assign(langMessages.en, msg);
+      const i18n = new VueI18n({
+        locale: 'en',
+        messages: langMessages,
+        fallbackLocale: 'en',
+        sync: true,
+      });
+      /* eslint-disable no-new */
+      new Vue({
+        el: '#app',
+        router,
+        i18n,
+        store,
+        template: '<App/>',
+        components: {
+          App,
+        },
+      });
+    });
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
-})
+
