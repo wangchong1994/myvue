@@ -36,6 +36,11 @@
       <linebox></linebox>
     </Row>
     <div id="showdiv" ><span id="showspan" >事件流</span></div>
+    <input v-model="test" type="number" placeholder="请输入电费" name="points"  oninput="if(value>30)value=30" />
+
+    <div>
+      {{test}}
+    </div>
   </div>
 </template>
 
@@ -47,6 +52,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      test: '',
       filters: {
         TID: '',
         ProductFilter: '',

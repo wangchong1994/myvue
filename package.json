@@ -26,6 +26,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@sentry/browser": "^4.4.1",
     "pkg-error-msg-hello": "^1.0.1",
     "iview": "^3.1.2",
     "autoprefixer": "^7.1.2",

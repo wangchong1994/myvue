@@ -9,7 +9,7 @@
 </div>
 </template>
 <script>
-    // import store from '@/store'
+    import store from '@/store'
     import { mapMutations } from 'vuex';
     import { mapActions } from 'vuex';
     import { mapState } from 'vuex'

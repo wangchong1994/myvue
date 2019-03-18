@@ -10,7 +10,16 @@ import store from './store'
 import axios from 'axios'
 import YpI18n from 'pkg-error-msg-hello';
 import VueI18n from 'vue-i18n';
+import * as Sentry from '@sentry/browser';
 
+
+Sentry.init({
+  dsn: 'https://a70d03d73ad74eb591a4475977435d7c@sentry.io/1335695',
+  integrations: [new Sentry.Integrations.Vue({ 
+    Vue,
+    attachProps: true
+  })]
+})
 
 Vue.use(VueI18n);
 
@@ -23,7 +32,7 @@ Vue.config.productionTip = false
 
 const langMessages = {
   en: {
-    
+
   },
   zh: {
 
