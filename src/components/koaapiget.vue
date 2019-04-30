@@ -16,6 +16,10 @@
   <Button  @click="login">登录账号</Button>
   <Button  @click="creatuser">创建账号</Button>
   <Button  @click="getuserlist">获取所有账号</Button>
+  <div>
+    <Button  @click="connectwebsocket">链接websocket</Button>
+    <Button  @click="sendwebsocket">发送websocket</Button>
+  </div>
 </div>
 </template>
 
@@ -26,6 +30,7 @@ export default {
 
   data() {
     return {
+      ws: null,
       formValidate: {
         password: '',
         username: '',
@@ -46,9 +51,29 @@ export default {
     };
   },
   methods:{
+    sendwebsocket() {
+      this.ws.send('Information from the browser');
+    },
+    connectwebsocket() {
+      var ws = new WebSocket("ws://localhost:8888");
+      this.ws = ws;
+      ws.onopen = function (e) {
+          console.log('Connection to server opened');
+      }
+      ws.onmessage = function (params) {
+        console.log('params', params);
+      }
+      // function sendMessage() {
+      //     ws.send($('#message').val());
+      // }
+      // sendMessage();
+      // this.$http('http://localhost:3000/websocket').then((data)=>{  
+      //   console.log(data)
+      // })
+    },
     getapibody(){
       console.log('获取apibody');
-      this.$http('http://localhost:3000/mongo').then((data)=>{
+      this.$http('http://localhost:3000/websocket').then((data)=>{  
         console.log(data)
       })
     },

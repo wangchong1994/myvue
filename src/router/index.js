@@ -8,6 +8,7 @@ import timer from '@/view/timer'
 import form from '@/view/form'
 import swiper from '@/components/swiper'
 import koaapiget from '@/components/koaapiget'
+import learnSomeJsFunc from '@/view/learnSomeJsFunc'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/timer',
       name: 'timer',
       component: timer
+    },
+    {
+      path: '/learnSomeJsFunc',
+      name: 'learnSomeJsFunc',
+      component: learnSomeJsFunc
     }
   ]
 })

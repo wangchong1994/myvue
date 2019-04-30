@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <Button>Default</Button>
-    <Button type="primary">Primary</Button>
+    <Button @click="Primary" type="primary">Primary</Button>
     <Button type="dashed">Dashed</Button>
     <Button type="text">Text</Button>
     <br><br>
@@ -84,6 +84,10 @@ export default {
     document.getElementById("showspan").addEventListener("click",function(){console.log("span")},false);
   },
   methods: {
+    Primary () {
+      let params = '1'
+      console.log('123', thsi.params);
+    }
     // showdiv(){
     //   console.log("div")
     // },

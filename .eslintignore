@@ -3,4 +3,4 @@
 /dist/
 /*.js
 /test/unit/coverage/
-eslint-disable *
+# eslint-disable *
