@@ -9,6 +9,7 @@ import form from '@/view/form'
 import swiper from '@/components/swiper'
 import koaapiget from '@/components/koaapiget'
 import learnSomeJsFunc from '@/view/learnSomeJsFunc'
+import canvasLearning from '@/view/canvasLearning'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/vuexcount',
       name: 'vuexcount',
       component: vuexcount
+    },
+    {
+      path: '/canvas-learn',
+      name: 'canvas-learn',
+      component: canvasLearning
     },
     {
       path: '/draggable',
