@@ -7,6 +7,8 @@ import iview from 'iview'
 import 'iview/dist/styles/iview.css'
 import echarts from 'echarts'
 import store from './store'
+import $ from 'jquery'
+import 'dragula/dist/dragula.css';
 import axios from 'axios'
 import YpI18n from 'pkg-error-msg-hello';
 import VueI18n from 'vue-i18n';

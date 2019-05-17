@@ -10,6 +10,7 @@ import swiper from '@/components/swiper'
 import koaapiget from '@/components/koaapiget'
 import learnSomeJsFunc from '@/view/learnSomeJsFunc'
 import canvasLearning from '@/view/canvasLearning'
+import dragula from '@/view/dragula'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/draggable',
       name: 'draggable',
       component: draggable
+    },
+    {
+      path: '/dragula',
+      name: 'dragula',
+      component: dragula
     },
     {
       path: '/swiper',
