@@ -38,9 +38,10 @@
     <div id="showdiv" ><span id="showspan" >事件流</span></div>
     <input v-model="test" type="number" placeholder="请输入电费" name="points"  oninput="if(value>30)value=30" />
 
-    <div>
-      {{test}}
+    <div class="test-fixed">
+        test
     </div>
+  <div class="drag-button" v-drag>可拖拽</div>
   </div>
 </template>
 
@@ -101,7 +102,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
 h1, h2 {
   font-weight: normal;
@@ -128,3 +128,15 @@ a {
   }
 }
 </style>
+<style lang="stylus" scoped>
+  .hello
+    position relative
+  .test-fixed
+    position fixed
+  .drag-button
+    position absolute
+    width fit-content
+    padding 4px
+    background #c9c9c9
+</style>
+

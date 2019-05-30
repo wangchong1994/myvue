@@ -1,7 +1,9 @@
 <template>
   <div>
+    <div v-for="(item, index) in cooperateTypeList" :key="index" :title-index="index">{{item.name}}</div>
     <div class="dragula" ref="navDraggle">
-      <div v-for="(item, index) in cooperateTypeList" :key="item.value" :title-index="index">{{item.name}}</div>
+      <div v-for="(item, index) in cooperateTypeList" :key="index" :title-index="index">{{item.name}}</div>
+
     </div>
     <Button @click="result">look result</Button>
   </div>

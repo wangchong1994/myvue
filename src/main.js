@@ -25,6 +25,36 @@ Sentry.init({
 
 Vue.use(VueI18n);
 
+// 自定义指令
+Vue.directive('drag', {
+  bind () {
+    console.log('drag')
+  },
+  inserted (el) {
+    console.log('el')
+    el.onmousedown = function (e) {
+      console.log('onmousedown')
+      let l = e.clientX - el.offsetLeft
+      let t = e.clientY - el.offsetTop
+      document.onmousemove = function (e) {
+        console.log('onmousemove')
+        el.style.left = e.clientX - l + 'px'
+        el.style.top = e.clientY - t + 'px'
+      }
+      el.onmouseup = function () {
+        console.log('onmouseup')
+        document.onmousemove = null
+        el.onmouseup = null
+      }
+      document.onmouseup = function () {
+        console.log('onmouseup')
+        document.onmousemove = null
+        el.onmouseup = null
+      }
+    }
+  }
+})
+
 Vue.prototype.$echarts = echarts
 axios.defaults.withCredentials = true; //配置为true
 Vue.prototype.$http = axios
