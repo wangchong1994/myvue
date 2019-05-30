@@ -13,17 +13,19 @@ import axios from 'axios'
 import YpI18n from 'pkg-error-msg-hello';
 import VueI18n from 'vue-i18n';
 import * as Sentry from '@sentry/browser';
-
+import '@fancyapps/fancybox/dist/jquery.fancybox';
+import '@fancyapps/fancybox/dist/jquery.fancybox.css';
 
 Sentry.init({
   dsn: 'https://a70d03d73ad74eb591a4475977435d7c@sentry.io/1335695',
-  integrations: [new Sentry.Integrations.Vue({ 
+  integrations: [new Sentry.Integrations.Vue({
     Vue,
     attachProps: true
   })]
 })
 
 Vue.use(VueI18n);
+window.$ = $;
 
 // 自定义指令
 Vue.directive('drag', {
@@ -53,7 +55,32 @@ Vue.directive('drag', {
       }
     }
   }
-})
+});
+Vue.directive('fancybox', {
+  bind() {
+    console.log('fancy');
+  },
+  inserted(el, binding) {
+
+    const e = window.$(el);
+     console.log('el', e);
+    const imgSrc = binding.value || e.attr('src');
+    if (imgSrc) {
+      // 用原图在fancybox中展示而不是缩略图
+      const src = imgSrc.replace(/\?x-oss-process.+/g, '');
+      e.wrap(`<a href="${src}" style="display: inline-block" data-fancybox></a>`);
+    }
+  },
+  update(el, binding) {
+    const e = window.$(el);
+    const aTag = e.parent();
+    if (aTag.length && aTag[0].tagName.toLowerCase() === 'a') {
+      if (aTag[0].href !== binding.value) {
+        aTag.attr('href', aTag[0].firstChild.src);
+      }
+    }
+  },
+});
 
 Vue.prototype.$echarts = echarts
 axios.defaults.withCredentials = true; //配置为true

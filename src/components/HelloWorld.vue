@@ -42,6 +42,8 @@
         test
     </div>
   <div class="drag-button" v-drag>可拖拽</div>
+  <span v-fancybox="imgurl">fancybox</span>
+  
   </div>
 </template>
 
@@ -54,6 +56,7 @@ export default {
   data () {
     return {
       test: '',
+      imgurl: 'https://res.yopoint.com/product/20171205/cf0e407561aa9df64817887a8ce8146b.png?x-oss-process=image/resize,h_80',
       filters: {
         TID: '',
         ProductFilter: '',

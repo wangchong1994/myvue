@@ -14,6 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
     "axios": "^0.18.0",
     "dragula": "^3.7.2",
     "echarts": "^4.2.0-rc.1",
