@@ -26,6 +26,7 @@
 var arr = [23, 9, 4, 78, 3, 2];
 var compare = function (x, y) {//比较函数
 	console.log(x,y);
-        return 1;
+  return x > y ? 1 : 0
+        // return 1;
 }
 console.log(arr.sort(compare));        

@@ -11,6 +11,8 @@ import koaapiget from '@/components/koaapiget'
 import learnSomeJsFunc from '@/view/learnSomeJsFunc'
 import canvasLearning from '@/view/canvasLearning'
 import dragula from '@/view/dragula'
+import quileEditor from '@/view/quileEditor'
+import 'quill/dist/quill.snow.css'
 
 Vue.use(Router)
 
@@ -40,6 +42,11 @@ export default new Router({
       path: '/dragula',
       name: 'dragula',
       component: dragula
+    },
+    {
+      path: '/quileEditor',
+      name: 'quileEditor',
+      component: quileEditor
     },
     {
       path: '/swiper',

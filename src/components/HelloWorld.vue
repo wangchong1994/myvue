@@ -6,57 +6,73 @@
     <Button @click="Primary" type="primary">Primary</Button>
     <Button type="dashed">Dashed</Button>
     <Button type="text">Text</Button>
-    <br><br>
+    <br /><br />
     <Button type="info">Info</Button>
     <Button type="success">Success</Button>
     <Button type="warning">Warning</Button>
     <Button type="error">Error</Button>
-    <datapicker style="width: 20%;"
-                              :value.sync="filters.DateRange"
-                              placeholder="请选择"
-                              :presets="['前7天', '前30天', '本月', '上月']">
-   </datapicker>
-      <br/>
-        <Row>
-        <Col span="8">  
-          <Select  style="width:200px">
-            <Option v-for="item in statusList" :value="item.value" :key="item.label">{{ item.label }}</Option>
-          </Select>
-        </Col>
-        <Col span="8" :offset="8"><Select clearable v-model="filters.ShipmentsStatus">
-          <Option v-for="(status, index) in statusList"
-                  :key="index"
-                  :value="status.value"
-                  :label="status.label">
-          </Option>
-        </Select></Col>
-     </Row>
-    <br/>
+    <datapicker
+      style="width: 20%;"
+      :value.sync="filters.DateRange"
+      placeholder="请选择"
+      :presets="['前7天', '前30天', '本月', '上月']"
+    >
+    </datapicker>
+    <br />
+    <Row>
+      <Col span="8">
+        <Select style="width:200px">
+          <Option v-for="item in statusList" :value="item.value" :key="item.label">{{
+            item.label
+          }}</Option>
+        </Select>
+      </Col>
+      <Col span="8" :offset="8"
+        ><Select clearable v-model="filters.ShipmentsStatus">
+          <Option
+            v-for="(status, index) in statusList"
+            :key="index"
+            :value="status.value"
+            :label="status.label"
+          >
+          </Option> </Select
+      ></Col>
+    </Row>
+    <br />
     <Row>
       <linebox></linebox>
     </Row>
-    <div id="showdiv" ><span id="showspan" >事件流</span></div>
-    <input v-model="test" type="number" placeholder="请输入电费" name="points"  oninput="if(value>30)value=30" />
+    <div id="showdiv"><span id="showspan">事件流</span></div>
+    <input
+      v-model="test"
+      type="number"
+      placeholder="请输入电费"
+      name="points"
+      oninput="if(value>30)value=30"
+    />
 
-    <div class="test-fixed">
-        test
+    <div class="test-fixed" v-hide-fixed="{ id: '#right-scroll-container', hideTop: 260, top: 60 }">
+      test
     </div>
-  <div class="drag-button" v-drag>可拖拽</div>
-  <span v-fancybox="imgurl">fancybox</span>
-  
+    <div class="drag-button" v-drag>可拖拽</div>
+    <span v-fancybox="imgurl">fancybox</span>
+    <input type="file" accept="image/video" name="upload" @change="onFileChange($event)" />
   </div>
 </template>
 
 <script>
-import  linebox from './linebox';
-import  datapicker from './datapicker';
-import select from './select'
+import ToolDirectives from '@/components/tool/tool-directives';
+import linebox from './linebox';
+import datapicker from './datapicker';
+import select from './select';
 export default {
   name: 'HelloWorld',
-  data () {
+  mixins: [ToolDirectives],
+  data() {
     return {
       test: '',
-      imgurl: 'https://res.yopoint.com/product/20171205/cf0e407561aa9df64817887a8ce8146b.png?x-oss-process=image/resize,h_80',
+      imgurl:
+        'https://res.yopoint.com/product/20171205/cf0e407561aa9df64817887a8ce8146b.png?x-oss-process=image/resize,h_80',
       filters: {
         TID: '',
         ProductFilter: '',
@@ -79,19 +95,31 @@ export default {
           value: '-1',
         },
       ],
-      msg: 'Welcome to Your Vue.js App'
-    }
+      msg: 'Welcome to Your Vue.js App',
+    };
   },
   created() {
-    console.log("RESPONSE_MSG", this.$t(`RESPONSE_MSG.DATA_NOT_EXIST`));
-    document.getElementById("showdiv").addEventListener("click",function(){console.log("div")},false);
-    document.getElementById("showspan").addEventListener("click",function(){console.log("span")},false);
+    console.log('RESPONSE_MSG', this.$t(`RESPONSE_MSG.DATA_NOT_EXIST`));
+    document.getElementById('showdiv').addEventListener(
+      'click',
+      function() {
+        console.log('div');
+      },
+      false
+    );
+    document.getElementById('showspan').addEventListener(
+      'click',
+      function() {
+        console.log('span');
+      },
+      false
+    );
   },
   methods: {
-    Primary () {
-      let params = '1'
-      console.log('123', thsi.params);
-    }
+    Primary() {
+      let params = '1';
+      console.log('123', params);
+    },
     // showdiv(){
     //   console.log("div")
     // },
@@ -100,13 +128,16 @@ export default {
     // }
   },
   components: {
-    datapicker,select,linebox
+    datapicker,
+    select,
+    linebox,
   },
-}
+};
 </script>
 
 <style  scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
@@ -114,15 +145,14 @@ ul {
   padding: 0;
 }
 li {
-  
-  
 }
 a {
   color: #42b983;
 }
-.ivu-select-item-selected, .ivu-select-item-selected:hover {
-    color: #fff;
-    background: rgba(45,140,240,.9);
+.ivu-select-item-selected,
+.ivu-select-item-selected:hover {
+  color: #fff;
+  background: rgba(45, 140, 240, 0.9);
 }
 .filter-item {
   margin-bottom: 15px;
@@ -132,14 +162,20 @@ a {
 }
 </style>
 <style lang="stylus" scoped>
-  .hello
-    position relative
-  .test-fixed
-    position fixed
-  .drag-button
-    position absolute
-    width fit-content
-    padding 4px
-    background #c9c9c9
+.hello {
+  position: relative;
+  height: 2000px;
+}
+
+.test-fixed {
+  position: fixed;
+}
+
+.drag-button {
+  position: absolute;
+  width: fit-content;
+  padding: 4px;
+  background: #c9c9c9;
+}
 </style>
 

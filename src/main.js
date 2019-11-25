@@ -24,6 +24,10 @@ Sentry.init({
   })]
 })
 
+// set lang
+// Vue.config.lang = 'zh-CN';
+// Moment.locale(Vue.config.lang);
+
 Vue.use(VueI18n);
 window.$ = $;
 

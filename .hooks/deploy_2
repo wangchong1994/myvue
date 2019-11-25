@@ -1,0 +1,119 @@
+#!/bin/sh
+# 复杂版本的
+upload(){
+  yarn upload
+
+  while true; do
+      read -p "是否上传成功[y/n]?" yn
+      case $yn in
+          [Yy]* ) break;;
+          [Nn]* )
+            while true; do
+              read -p "是否重新上传[y/n]?" yn2
+              case $yn2 in
+                [Yy]* ) upload; break;;
+                [Nn]* ) exit;;
+                * ) echo "yes or no.";;
+              esac
+            done
+            break;;
+          * ) echo "yes or no.";;
+      esac
+  done
+}
+
+
+# 检测文件修改记录
+diff=$(git diff)
+if [[ $diff != "" ]]
+then
+  echo "\033[31m 你还有文件没有提交，先 commit 你的代码 (·_·) \033[0m"
+  files=$(git diff --name-only)
+  echo "\n"
+  for file in ${files}; do
+    echo "   $file"
+  done;
+  echo "\n"
+  exit 1
+
+fi
+
+# 拉取最新代码
+branch=$(git symbolic-ref --short -q HEAD)
+if [ $branch == "develop" ] 
+then
+  git pull --rebase origin $branch
+  ret=$?
+  if ! test "$ret" -eq 0
+  then
+      echo >&2 "git rebase failed: exit status $ret"
+      exit 1
+  fi
+else
+  read -p "确定要部署 $branch 分支吗？[y/n/enter]" yn
+  case $yn in
+    [Yy]* ) break;;
+    [Nn]* ) exit;;
+    * ) 
+    echo "default yes!!!"
+    break;;
+  esac
+fi
+
+# 更新package
+read -p "是否更新package?" yn
+case $yn in
+  [Yy]* ) 
+    yarn
+    yarn add ssh:git@code.aliyun.com:yopoint/yp-pkg-i18n-error.git#develop 
+    ret=$?
+    if ! test "$ret" -eq 0
+    then
+        echo >&2 "yarn install failed: exit status $ret"
+        exit 1
+    fi
+    break;;
+  * ) break;;
+esac
+
+yarn build
+
+ret=$?
+if ! test "$ret" -eq 0
+then
+    echo >&2 "\n\n\033[31m 构建失败: exit status $ret \033[0m\n"
+    exit 1
+fi
+echo "\n"
+echo "\033[32m 构建完成 \033[0m"
+echo "\n"
+
+upload
+
+file=$(cat ./.config.json)
+re="\"dir\":.\".*\""
+if [[ $file =~ $re ]]; then
+  if [ ! -d "./dist" ]; then
+    mkdir ./dist
+  fi
+  replace=""
+  dir=$(echo $(echo $(echo ${BASH_REMATCH} | sed "s/\"dir\":/${replace}/g")| tr -d '[:space:]') | sed "s/[\"]/${replace}/g")
+  # git commit -am "[AUTO][BUILD_LOCAL]: desktop, $dir"
+  echo "\n\033[32m [BUILD_LOCAL]: desktop, $dir \033[0m\n"
+
+  # branch=$(git symbolic-ref --short -q HEAD)
+  if [ $branch == "develop" ]; then
+    git pull --rebase origin develop
+    ret=$?
+    if ! test "$ret" -eq 0
+    then
+        echo >&2 "git rebase failed: exit status $ret"
+        exit 1
+    fi
+  fi
+  git push origin $branch
+  git tag -a "$dir" -m "build-tag: deploy, desktop, $dir"
+  git push origin "$dir"
+fi
+
+exit 0
