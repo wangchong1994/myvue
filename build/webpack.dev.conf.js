@@ -42,7 +42,35 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    }
+    },
+    /**
+     * 参照 .mock.response.example.json 本地创建 .mock.response.json 文件
+     * 把需要 mock 的 API 加到 .mock.response.json 即可
+     * 删除 API 即不 mock
+     */
+    before(app) {
+      console.log('app-------------->', app);
+      app.post('/api', async (req, res, next) => {
+        const mockFile = './.mock.response.json';
+        if (fs.existsSync(mockFile)) {
+          const mockRes = JSON.parse(
+            fs.readFileSync(mockFile, { encoding: 'utf8' }) || {},
+          );
+          const { method } = req.headers;
+          if (mockRes[method]) {
+            res.json(mockRes[method]);
+          }
+        }
+        next();
+      });
+    },
+    // proxy: {
+    //   '/*': {
+    //     ws: false,
+    //     target: 'http://dev-o.yopoint.cc',
+    //     changeOrigin: true,
+    //   },
+    // },
   },
   plugins: [
     new webpack.DefinePlugin({
