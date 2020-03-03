@@ -1,0 +1,9 @@
+{
+  "mock.api.example": {
+    "error_code": 0,
+    "error_msg": "SUCCESS",
+    "data": {
+      "hello": "world"
+    }
+  }
+}
